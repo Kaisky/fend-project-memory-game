@@ -2,6 +2,7 @@
  * Create a list that holds all of your cards
  */
 const cardsDeck = document.querySelector(".deck");
+const restartGame = document.querySelector('.restart');
 const cards =[
     'fa-diamond',
     'fa-paper-plane-o',
@@ -27,12 +28,17 @@ const cards =[
  *   - add each card's HTML to the page
  */
 shuffle(cards);
-for (const card of cards){
-    let li = document.createElement('li');
-    li.classList.add('card');
-    li.innerHTML=`<i class="fa ${card}"></i>`
-    cardsDeck.appendChild(li);
-}
+populateCards();
+
+function populateCards(){
+    for (const card of cards){
+        let li = document.createElement('li');
+        li.classList.add('card');
+        li.innerHTML=`<i class='fa ${card}'></i>`
+        cardsDeck.appendChild(li);
+    }
+};
+
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -61,10 +67,47 @@ function shuffle(array) {
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
 
- const selectedCard = document.querySelectorAll('.card');
- selectedCard.forEach(function(item){
-     item.addEventListener('click',()=>{
-        item.classList.add('open', 'show');
-     });
- });
+const allCards = document.querySelectorAll('.card');
+let opened = [];
+let matched = 0;
+allCards.forEach((card)=>{
+    let clicked = false;
+    let cardName = getCardName(card);
+    card.addEventListener('click', ()=>{
+        if (!clicked){
+            if (!(opened.indexOf(cardName)>-1)){
+                showCard(opened,cardName,card); 
+            }else{
+                card.classList.add('open', 'show');
+                let matchAll = matchedCards();
+                matchAll.classList.toggle('match'); 
+                matchAll.classList.toggle('open');     
+                   
+            };
+        }
+        clicked = true;    
+    })
+    
+})
+function matchedCards(){
+    return document.querySelectorAll('.open');
+    
+};
 
+function getCardName(card){
+    return card.firstChild.getAttributeNode('class').value.substr(3);
+}
+function showCard(array,string,el){
+    array.push(string);
+    el.classList.toggle('show');
+    el.classList.toggle('open');
+}
+
+
+//  allCards.forEach(function(item){
+//      item.addEventListener('click',()=>{
+//         item.classList.add('open', 'show');
+//      });
+//  });
+
+ restartGame.addEventListener('click',()=>location.reload());

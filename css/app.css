@@ -72,6 +72,11 @@ h1 {
     cursor: default;
 }
 
+.close {
+    transform: rotateY(180deg);
+    transition: 600ms;  
+}
+
 .deck .card.show {
     font-size: 33px;
 }
