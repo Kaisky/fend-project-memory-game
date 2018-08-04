@@ -7,6 +7,8 @@
     <link rel="stylesheet prefetch" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
     <link rel="stylesheet prefetch" href="https://fonts.googleapis.com/css?family=Coda">
     <link rel="stylesheet" href="css/app.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <body>
 
@@ -16,13 +18,17 @@
         </header>
 
         <section class="score-panel">
-        	<ul class="stars">
+        	<ul class="stars"> Rating
         		<li><i class="fa fa-star"></i></li>
         		<li><i class="fa fa-star"></i></li>
-        		<li><i class="fa fa-star"></i></li>
+                <li><i class="fa fa-star"></i></li>
+                <li><i class="fa fa-star"></i></li>
+                <li><i class="fa fa-star"></i></li>
+                
         	</ul>
 
-        	<span class="moves">3</span> Moves
+            Moves <span class="moves"></span>
+            Time <div class="time"></div>
 
             <div class="restart">
         		<i class="fa fa-repeat"></i>
@@ -33,6 +39,12 @@
 
         </ul>
     </div>
+    <div class="winner"></div>
+    <div class='congrats'>
+        <p class="message">Congratulations! You have finished the game with <span class="star-rating"></span>stars rating for <span class="timer"></span> minutes, by making <span class="moves-made"></span> moves! great</p>
+        <button class="play-again">Play again</button>
+     </div>
+    
 
     <script src="js/app.js"></script>
 </body>

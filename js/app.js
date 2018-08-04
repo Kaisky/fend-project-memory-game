@@ -1,8 +1,8 @@
 /*
  * Create a list that holds all of your cards
  */
-const cardsDeck = document.querySelector(".deck");
-const restartGame = document.querySelector('.restart');
+const cardsDeck = $(".deck");
+const restartGame = $('.restart');
 const cards =[
     'fa-diamond',
     'fa-paper-plane-o',
@@ -21,24 +21,29 @@ const cards =[
     'fa-bicycle',
     'fa-bomb'
 ];
+let opened = [];
+let matched = 0;
+let moves = 0;
+let rating = 5;
+let seconds = 0;
 /*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
  *   - loop through each card and create its HTML
  *   - add each card's HTML to the page
  */
-shuffle(cards);
-populateCards();
 
-function populateCards(){
-    for (const card of cards){
-        let li = document.createElement('li');
-        li.classList.add('card');
-        li.innerHTML=`<i class='fa ${card}'></i>`
-        cardsDeck.appendChild(li);
-    }
-};
+$(document).ready(()=>{
+    initialGameStart();
+    $('li').click(cardClicked);
+    $('.deck').one('click', timer)
+    countMoves();
+});
 
+function initialGameStart(){
+    shuffle(cards);
+    populateCards();
+}
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -55,6 +60,122 @@ function shuffle(array) {
     return array;
 }
 
+function populateCards(){
+    for (const card of cards){
+        let li = $('<li/>');
+        li.addClass('card');
+        li.append(`<i class='fa ${card}'></i>`)
+        cardsDeck.append(li);
+    }
+};
+
+restartGame.click(()=>location.reload());
+
+function cardClicked(event){
+    if ($(this).hasClass('open') || $(this).hasClass('match')){
+        return
+    }
+    if (opened.length < 2) {
+        $(this).toggleClass("open show");
+        opened.push($(this))
+    }
+    if (opened.length === 2){
+        setTimeout(checkIfCardsMatch, 400);
+        moves++;
+        countMoves();
+        starRating();
+    }
+
+ }
+
+function checkIfCardsMatch() {
+    if (cardName((opened[0])[0]) === cardName((opened[1])[0])) {
+        matched++;
+        opened.forEach((card) => {
+            card.animateCss('tada', ()=> card.toggleClass("show open match"));
+        })
+    }else {
+        opened.forEach((card)=>{
+            card.toggleClass('no-match');
+            card.animateCss('shake', ()=>{
+                card.toggleClass('show open no-match')
+            })
+        })
+    }
+    opened = [];
+    (matched === 8) ? endGame() : ''; 
+}
+
+
+function timer() {
+    let time = setInterval(() => {
+        ++seconds;
+        if(matched===8) clearInterval(time);
+        $('.time').text(`${seconds} seconds`)
+      }, 1000);
+      
+}
+
+
+
+
+function countMoves(){
+   $('.moves').text(moves);
+ }
+
+ function starRating() {
+    if (moves % 5 === 0){
+        $('.stars').find('li:first').remove()
+        if(rating > 1) rating--;
+    }
+    
+ }
+
+function endGame(){
+    if(matched === 8){
+        let time = seconds/60;
+        $('.star-rating').text(rating);
+        $('.timer').text(time);
+        $('.moves-made').text(moves);
+        $('.congrats').css('visibility','visible');
+        $('.winner').css('visibility','visible');
+
+    }
+}
+
+$('button').click(()=>location.reload());
+
+function cardName(card){
+    return card.firstChild.className
+}
+
+// loaded animateCss from https://github.com/daneden/animate.css/#usage
+$.fn.extend({
+    animateCss: function(animationName, callback) {
+      var animationEnd = (function(el) {
+        var animations = {
+          animation: 'animationend',
+          OAnimation: 'oAnimationEnd',
+          MozAnimation: 'mozAnimationEnd',
+          WebkitAnimation: 'webkitAnimationEnd',
+        };
+  
+        for (var t in animations) {
+          if (el.style[t] !== undefined) {
+            return animations[t];
+          }
+        }
+      })(document.createElement('div'));
+  
+      this.addClass('animated ' + animationName).one(animationEnd, function() {
+        $(this).removeClass('animated ' + animationName);
+  
+        if (typeof callback === 'function') callback();
+      });
+    
+      return this;
+    },
+  });
 
 /*
  * set up the event listener for a card. If a card is clicked:
@@ -67,47 +188,3 @@ function shuffle(array) {
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
 
-const allCards = document.querySelectorAll('.card');
-let opened = [];
-let matched = 0;
-allCards.forEach((card)=>{
-    let clicked = false;
-    let cardName = getCardName(card);
-    card.addEventListener('click', ()=>{
-        if (!clicked){
-            if (!(opened.indexOf(cardName)>-1)){
-                showCard(opened,cardName,card); 
-            }else{
-                card.classList.add('open', 'show');
-                let matchAll = matchedCards();
-                matchAll.classList.toggle('match'); 
-                matchAll.classList.toggle('open');     
-                   
-            };
-        }
-        clicked = true;    
-    })
-    
-})
-function matchedCards(){
-    return document.querySelectorAll('.open');
-    
-};
-
-function getCardName(card){
-    return card.firstChild.getAttributeNode('class').value.substr(3);
-}
-function showCard(array,string,el){
-    array.push(string);
-    el.classList.toggle('show');
-    el.classList.toggle('open');
-}
-
-
-//  allCards.forEach(function(item){
-//      item.addEventListener('click',()=>{
-//         item.classList.add('open', 'show');
-//      });
-//  });
-
- restartGame.addEventListener('click',()=>location.reload());

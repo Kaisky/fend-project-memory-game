@@ -66,15 +66,14 @@ h1 {
 }
 
 .deck .card.open {
-    transform: rotateY(180deg);
-    transition: 600ms;
+    transform: rotateY(360deg);
+    transition: 500ms;
     background: #02b3e4;
     cursor: default;
 }
 
-.close {
-    transform: rotateY(180deg);
-    transition: 600ms;  
+.no-match {
+    background:#FD7C7E !important;
 }
 
 .deck .card.show {
@@ -93,7 +92,7 @@ h1 {
 
 .score-panel {
     text-align: left;
-    width: 345px;
+    width: 500px;
     margin-bottom: 10px;
 }
 
@@ -112,4 +111,80 @@ h1 {
 .score-panel .restart {
     float: right;
     cursor: pointer;
+    position: relative;
+}
+
+.moves {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.time {
+    display: inline;
+    padding-left: 15px;
+    padding-right: 10px;
+}
+
+.winner { 
+    visibility: hidden;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-color: black;
+    z-index: 999;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    opacity: 0.7;
+}
+
+.congrats {
+    visibility: hidden;
+    width: 400px;
+    background: #ffffff url('../img/geometry2.png');
+    z-index: 999;
+    position: absolute;
+    margin: auto;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 200px;
+    border:white 1px solid;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.message {
+    padding: 20px;
+    width: 400px;
+    text-align: center;
+}
+
+button {
+    display: inline-block;
+    border: none;
+    padding: 1rem 2rem;
+    margin: 0;
+    text-decoration: none;
+    background: #0069ed;
+    color: #ffffff;
+    font-family: sans-serif;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 8px;
+    text-align: center;
+    transition: background 250ms ease-in-out, 
+                transform 150ms ease;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+button:hover,
+button:focus {
+    background: #0053ba;
 }
