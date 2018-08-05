@@ -120,7 +120,7 @@ function countMoves() {
 }
 
 function starRating() {
-    if (moves % 10 === 0) {
+    if (moves % 8 === 0) {
         $('.stars').find('li:first').remove()
         if (rating > 1) rating--;
     }

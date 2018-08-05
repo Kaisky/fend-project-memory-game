@@ -4,7 +4,7 @@
 Memory Game - Udacity FEND Project
 
 The timer starts after the 1st click.
-The star rating decreases with 1 star after 10 moves
+The star rating decreases with 1 star after 8 moves
 
 
 ## Table of Contents
