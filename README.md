@@ -1,20 +1,24 @@
-# Memory Game Project
+# Memory Game Project - UDACITY FEND
+
+## General Info: 
+Memory Game - Udacity FEND Project
+
+The timer starts after the 1st click.
+The star rating decreases with 1 star after 10 moves
+
 
 ## Table of Contents
 
 * [Instructions](#instructions)
 * [Contributing](#contributing)
 
-## Instructions
+## Used 3rd Party libraries
 
-The starter project has some HTML and CSS styling to display a static version of the Memory Game project. You'll need to convert this project from a static project to an interactive one. This will require modifying the HTML and CSS files, but primarily the JavaScript file.
-
-To get started, open `js/app.js` and start building out the app's functionality
-
-For specific, detailed instructions, look at the project instructions in the [Udacity Classroom](https://classroom.udacity.com/me).
+In thid projects are used:
+1.  jQuery: https://jquery.com/
+2. Font Awesome Icons - https://fontawesome.com/
+3. AnimateCSS: https://daneden.github.io/animate.css/
 
 ## Contributing
 
-This repository is the starter code for _all_ Udacity students. Therefore, we most likely will not accept pull requests.
-
-For details, check out [CONTRIBUTING.md](CONTRIBUTING.md).
+Contributors are welcome
