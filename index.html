@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <title>Matching Game</title>
@@ -10,6 +11,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
+
 <body>
 
     <div class="container">
@@ -18,21 +20,35 @@
         </header>
 
         <section class="score-panel">
-        	<ul class="stars"> Rating
-        		<li><i class="fa fa-star"></i></li>
-        		<li><i class="fa fa-star"></i></li>
-                <li><i class="fa fa-star"></i></li>
-                <li><i class="fa fa-star"></i></li>
-                <li><i class="fa fa-star"></i></li>
-                
-        	</ul>
+            <ul class="stars"> Rating
+                <li>
+                    <i class="fa fa-star"></i>
+                </li>
+                <li>
+                    <i class="fa fa-star"></i>
+                </li>
+                <li>
+                    <i class="fa fa-star"></i>
+                </li>
+                <li>
+                    <i class="fa fa-star"></i>
+                </li>
+                <li>
+                    <i class="fa fa-star"></i>
+                </li>
 
-            Moves <span class="moves"></span>
-            Time <div class="time"></div>
+            </ul>
+
+            <p>Moves
+                <span class="moves"></span>
+            </p>
+            <p>Time
+                <div class="time"></div>
+            </p>
 
             <div class="restart">
-        		<i class="fa fa-repeat"></i>
-        	</div>
+                <i class="fa fa-repeat"></i>
+            </div>
         </section>
 
         <ul class="deck">
@@ -41,11 +57,15 @@
     </div>
     <div class="winner"></div>
     <div class='congrats'>
-        <p class="message">Congratulations! You have finished the game with <span class="star-rating"></span>stars rating for <span class="timer"></span> minutes, by making <span class="moves-made"></span> moves! great</p>
+        <p class="message">Congratulations! You have finished the game with
+            <span class="star-rating"></span> stars rating for
+            <span class="timer"></span> seconds, by making
+            <span class="moves-made"></span> moves! Good job!</p>
         <button class="play-again">Play again</button>
-     </div>
-    
+    </div>
+
 
     <script src="js/app.js"></script>
 </body>
+
 </html>

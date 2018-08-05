@@ -3,7 +3,7 @@
  */
 const cardsDeck = $(".deck");
 const restartGame = $('.restart');
-const cards =[
+const cards = [
     'fa-diamond',
     'fa-paper-plane-o',
     'fa-anchor',
@@ -33,14 +33,14 @@ let seconds = 0;
  *   - add each card's HTML to the page
  */
 
-$(document).ready(()=>{
+$(document).ready(() => {
     initialGameStart();
     $('li').click(cardClicked);
     $('.deck').one('click', timer)
     countMoves();
 });
 
-function initialGameStart(){
+function initialGameStart() {
     shuffle(cards);
     populateCards();
 }
@@ -60,8 +60,8 @@ function shuffle(array) {
     return array;
 }
 
-function populateCards(){
-    for (const card of cards){
+function populateCards() {
+    for (const card of cards) {
         let li = $('<li/>');
         li.addClass('card');
         li.append(`<i class='fa ${card}'></i>`)
@@ -69,113 +69,110 @@ function populateCards(){
     }
 };
 
-restartGame.click(()=>location.reload());
+restartGame.click(() => location.reload());
 
-function cardClicked(event){
-    if ($(this).hasClass('open') || $(this).hasClass('match')){
+function cardClicked(event) {
+    if ($(this).hasClass('open') || $(this).hasClass('match')) {
         return
     }
     if (opened.length < 2) {
         $(this).toggleClass("open show");
         opened.push($(this))
     }
-    if (opened.length === 2){
+    if (opened.length === 2) {
         setTimeout(checkIfCardsMatch, 400);
         moves++;
         countMoves();
         starRating();
     }
 
- }
+}
 
 function checkIfCardsMatch() {
     if (cardName((opened[0])[0]) === cardName((opened[1])[0])) {
         matched++;
         opened.forEach((card) => {
-            card.animateCss('tada', ()=> card.toggleClass("show open match"));
+            card.animateCss('tada', () => card.toggleClass("show open match"));
         })
-    }else {
-        opened.forEach((card)=>{
+    } else {
+        opened.forEach((card) => {
             card.toggleClass('no-match');
-            card.animateCss('shake', ()=>{
+            card.animateCss('shake', () => {
                 card.toggleClass('show open no-match')
             })
         })
     }
     opened = [];
-    (matched === 8) ? endGame() : ''; 
+    (matched === 8) ? endGame() : '';
 }
-
 
 function timer() {
     let time = setInterval(() => {
         ++seconds;
-        if(matched===8) clearInterval(time);
+        if (matched === 8) clearInterval(time);
         $('.time').text(`${seconds} seconds`)
-      }, 1000);
-      
+    }, 1000);
+
 }
 
+function countMoves() {
+    $('.moves').text(moves);
+}
 
-
-
-function countMoves(){
-   $('.moves').text(moves);
- }
-
- function starRating() {
-    if (moves % 5 === 0){
+function starRating() {
+    if (moves % 5 === 0) {
         $('.stars').find('li:first').remove()
-        if(rating > 1) rating--;
+        if (rating > 1) rating--;
     }
-    
- }
 
-function endGame(){
-    if(matched === 8){
-        let time = seconds/60;
-        $('.star-rating').text(rating);
-        $('.timer').text(time);
-        $('.moves-made').text(moves);
-        $('.congrats').css('visibility','visible');
-        $('.winner').css('visibility','visible');
+}
 
+function endGame() {
+    if (matched === 8) {
+        let time = seconds;
+        setTimeout(function(){
+            $('.star-rating').text(rating);
+            $('.timer').text(time);
+            $('.moves-made').text(moves);
+            $('.congrats').css('visibility', 'visible');
+            $('.winner').css('visibility', 'visible');
+        },2000)
     }
 }
 
-$('button').click(()=>location.reload());
+$('button').click(() => location.reload());
 
-function cardName(card){
+function cardName(card) {
     return card.firstChild.className
 }
 
 // loaded animateCss from https://github.com/daneden/animate.css/#usage
 $.fn.extend({
-    animateCss: function(animationName, callback) {
-      var animationEnd = (function(el) {
-        var animations = {
-          animation: 'animationend',
-          OAnimation: 'oAnimationEnd',
-          MozAnimation: 'mozAnimationEnd',
-          WebkitAnimation: 'webkitAnimationEnd',
-        };
-  
-        for (var t in animations) {
-          if (el.style[t] !== undefined) {
-            return animations[t];
-          }
-        }
-      })(document.createElement('div'));
-  
-      this.addClass('animated ' + animationName).one(animationEnd, function() {
-        $(this).removeClass('animated ' + animationName);
-  
-        if (typeof callback === 'function') callback();
-      });
-    
-      return this;
+    animateCss: function (animationName, callback) {
+        var animationEnd = (function (el) {
+            var animations = {
+                animation: 'animationend',
+                OAnimation: 'oAnimationEnd',
+                MozAnimation: 'mozAnimationEnd',
+                WebkitAnimation: 'webkitAnimationEnd',
+            };
+
+            for (var t in animations) {
+                if (el.style[t] !== undefined) {
+                    return animations[t];
+                }
+            }
+        })(document.createElement('div'));
+
+        this.addClass('animated ' + animationName).one(animationEnd, function () {
+            $(this).removeClass('animated ' + animationName);
+
+            if (typeof callback === 'function') callback();
+        });
+
+        return this;
     },
-  });
+});
 
 /*
  * set up the event listener for a card. If a card is clicked:

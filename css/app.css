@@ -17,7 +17,8 @@ body {
 }
 
 body {
-    background: #ffffff url('../img/geometry2.png'); /* Background pattern from Subtle Patterns */
+    background: #ffffff url('../img/geometry2.png');
+    /* Background pattern from Subtle Patterns */
     font-family: 'Coda', cursive;
 }
 
@@ -73,7 +74,7 @@ h1 {
 }
 
 .no-match {
-    background:#FD7C7E !important;
+    background: #FD7C7E !important;
 }
 
 .deck .card.show {
@@ -93,14 +94,16 @@ h1 {
 .score-panel {
     text-align: left;
     width: 500px;
-    margin-bottom: 10px;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-around;
 }
 
 .score-panel .stars {
     margin: 0;
     padding: 0;
     display: inline-block;
-    margin: 0 5px 0 0;
+    margin: 0;
 }
 
 .score-panel .stars li {
@@ -120,12 +123,12 @@ h1 {
 }
 
 .time {
-    display: inline;
+    display: inline-block;
     padding-left: 15px;
     padding-right: 10px;
 }
 
-.winner { 
+.winner {
     visibility: hidden;
     width: 100%;
     height: 100%;
@@ -152,7 +155,7 @@ h1 {
     bottom: 0;
     left: 0;
     height: 200px;
-    border:white 1px solid;
+    border: white 1px solid;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
@@ -178,8 +181,7 @@ button {
     cursor: pointer;
     border-radius: 8px;
     text-align: center;
-    transition: background 250ms ease-in-out, 
-                transform 150ms ease;
+    transition: background 250ms ease-in-out, transform 150ms ease;
     -webkit-appearance: none;
     -moz-appearance: none;
 }
