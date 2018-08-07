@@ -3,15 +3,7 @@
  */
 const cardsDeck = $(".deck");
 const restartGame = $('.restart');
-const cards = [
-    'fa-diamond',
-    'fa-paper-plane-o',
-    'fa-anchor',
-    'fa-bolt',
-    'fa-cube',
-    'fa-leaf',
-    'fa-bicycle',
-    'fa-bomb',
+const deck = [
     'fa-diamond',
     'fa-paper-plane-o',
     'fa-anchor',
@@ -21,6 +13,8 @@ const cards = [
     'fa-bicycle',
     'fa-bomb'
 ];
+
+const cards = deck.concat(deck);
 let opened = [];
 let matched = 0;
 let moves = 0;
@@ -47,7 +41,7 @@ function initialGameStart() {
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
-    var currentIndex = array.length, temporaryValue, randomIndex;
+    let currentIndex = array.length, temporaryValue, randomIndex;
 
     while (currentIndex !== 0) {
         randomIndex = Math.floor(Math.random() * currentIndex);
