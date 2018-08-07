@@ -1,5 +1,7 @@
 # Memory Game Project - UDACITY FEND
 
+You can play the game [HERE](https://kaisky.github.io/fend-project-memory-game/)
+
 ## General Info: 
 Memory Game - Udacity FEND Project
 
