@@ -18,12 +18,6 @@ When restarted the cards are shuffled
 
 Happy playing!
 
-
-## Table of Contents
-
-* [Instructions](#instructions)
-* [Contributing](#contributing)
-
 ## Used 3rd Party libraries
 
 In thid projects are used:
